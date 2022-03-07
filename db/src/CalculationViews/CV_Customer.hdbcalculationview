@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_Customer" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_Customer.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CUSTOMER">
+    <resourceUri>CUSTOMER</resourceUri>
+  </DataSource>
+  <DataSource id="CUSTOMERDEPARTMENT">
+    <resourceUri>CUSTOMERDEPARTMENT</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="P_CUSTOMER" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMERID"/>
+      <viewAttribute id="CUSTOMERNAME"/>
+      <viewAttribute id="CUSTOMERTYPE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CUSTOMER"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMERID"/>
+      <viewAttribute id="CUSTOMERNAME"/>
+      <viewAttribute id="CUSTOMERTYPE"/>
+      <viewAttribute id="DEPARTMENTID"/>
+      <viewAttribute id="LOCATION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="P_CUSTOMER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMERID" source="CUSTOMERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMERNAME" source="CUSTOMERNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMERTYPE" source="CUSTOMERTYPE"/>
+    </input>
+    <input node="P_CUSTOMERDEPARTMENT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTID" source="DEPARTMENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LOCATION" source="LOCATION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMERID" source="CUSTOMERID"/>
+    </input>
+    <joinAttribute name="CUSTOMERID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="P_CUSTOMERDEPARTMENT">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMERID"/>
+      <viewAttribute id="DEPARTMENTID"/>
+      <viewAttribute id="LOCATION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CUSTOMERDEPARTMENT"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="CUSTOMERID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMERID"/>
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOMERID"/>
+    </attribute>
+    <attribute id="CUSTOMERNAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMERNAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOMERNAME"/>
+    </attribute>
+    <attribute id="CUSTOMERTYPE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMERTYPE"/>
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOMERTYPE"/>
+    </attribute>
+    <attribute id="DEPARTMENTID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENTID"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPARTMENTID"/>
+    </attribute>
+    <attribute id="LOCATION" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LOCATION"/>
+      <keyMapping columnObjectName="Join_1" columnName="LOCATION"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="P_CUSTOMER" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="357"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="P_CUSTOMER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="P_CUSTOMERDEPARTMENT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="136.0234375"/>
+    </shape>
+    <shape expanded="true" modelObjectName="P_CUSTOMERDEPARTMENT" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="356.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

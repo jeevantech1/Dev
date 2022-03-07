@@ -1,0 +1,8 @@
+{
+  "P_CUSTOMER": {
+    "target": {
+      "object": "CUSTOMER",
+      "schema": "HANAMODELING_HDI_DB_1"
+    }
+  }
+}
